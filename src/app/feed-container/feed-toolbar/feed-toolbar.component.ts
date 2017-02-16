@@ -3,6 +3,7 @@ import { ApiService } from '../../api.service';
 import { FormGroup, FormControl, Validators, FormBuilder } 
     from '@angular/forms';
 import { ToolbarService } from '../../toolbar.service'
+
 @Component({
   selector: 'app-feed-toolbar',
   templateUrl: './feed-toolbar.component.html',
@@ -11,6 +12,7 @@ import { ToolbarService } from '../../toolbar.service'
 export class FeedToolbarComponent implements OnInit {
 
   public form: FormGroup;
+  
   constructor(public apiService: ApiService, fb: FormBuilder, public toolbarService: ToolbarService) {
       this.form = fb.group({
          "subreddit":["", Validators.required],
@@ -22,6 +24,12 @@ export class FeedToolbarComponent implements OnInit {
     e.preventDefault();
     console.log(this.form.value)
     this.toolbarService.subredditFilter.next(this.form.value.subreddit)
+  }
+  sortByDateClicked(){
+    this.toolbarService.sortByDate.next(true)
+  }
+  sortByScoreClicked(){
+    this.toolbarService.sortByScore.next(true)
   }
   ngOnInit() {
   }

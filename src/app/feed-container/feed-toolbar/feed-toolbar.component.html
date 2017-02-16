@@ -9,7 +9,7 @@
       <input type="text" formControlName="postHint">
   </p>-->
   <!-- Switch -->
-  <div class="switch"> 
+  <!--<div class="switch"> 
     <p>
       <label>brandSafe</label>
     </p>
@@ -19,7 +19,7 @@
       <span class="lever"></span>
       On
     </label>
-  </div>
+  </div>-->
 
   <p>
       <button type="submit" [disabled]="!form.valid">Submit</button>
@@ -28,3 +28,18 @@
       <button type="submit" ng-submit="">Reset Filters</button>
   </p>-->
 </form>
+<div>
+  <h4>
+    Sort By:
+  </h4>
+  <a href="#" (click)="sortByDateClicked()">
+    Date
+  </a>
+  <span>
+    |
+  </span>
+  <a href="#" (click)="sortByScoreClicked()">
+    Score
+  </a>
+
+</div>

@@ -23,6 +23,19 @@ export class FeedBodyComponent implements OnInit {
         return item.data.subreddit.includes(this.subredditFilter)
       }.bind(this))
     }.bind(this))
+
+    this.toolbarService.sortByDate.subscribe(function(res){
+      this.rowData = this.rowData.sort(function(a, b){
+        return a.data.created > b.data.created ? 1 : -1
+      })
+    }.bind(this))
+    this.toolbarService.sortByScore.subscribe(function(res){
+      
+      this.rowData = this.rowData.sort(function(a, b){
+        return a.data.score > b.data.score ? 1 : -1
+      })
+    }.bind(this))
+
   }
 
   ngOnInit() {

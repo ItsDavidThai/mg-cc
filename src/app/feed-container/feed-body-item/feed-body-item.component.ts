@@ -9,8 +9,7 @@ export class FeedBodyItemComponent implements OnInit {
   @Input() subreddit;
   @Input() createdAt;
   @Input() score;
-  @Input() brandSafe;
-  @Input() postHint;
+
 
   constructor() { }
 

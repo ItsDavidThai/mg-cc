@@ -1,37 +1,25 @@
-<h1>Table Filtesr</h1>
+<h1>Table Filters</h1>
 <form [formGroup]="form" (ngSubmit)="onFilterSubmit($event)">
   <p>
       <label>Subreddit:</label>
       <input type="text" formControlName="subreddit">
   </p>
-  <!--<p>
-      <label>Post Type:</label>
-      <input type="text" formControlName="postHint">
-  </p>-->
-  <!-- Switch -->
-  <!--<div class="switch"> 
-    <p>
-      <label>brandSafe</label>
-    </p>
-    <label>
-      Off
-      <input type="checkbox" formControlName="brandSafe">
-      <span class="lever"></span>
-      On
-    </label>
-  </div>-->
-
   <p>
       <button type="submit" [disabled]="!form.valid">Submit</button>
   </p>
-  <!--<p>
-      <button type="submit" ng-submit="">Reset Filters</button>
-  </p>-->
 </form>
 <div>
   <h4>
     Sort By:
   </h4>
+  <div class="switch"> 
+    <label>
+      Asc
+      <input type="checkbox" (click)="changeSortOrder($event)">
+      <span class="lever"></span>
+      Dsc
+    </label>
+  </div>
   <a href="#" (click)="sortByDateClicked()">
     Date
   </a>
@@ -41,5 +29,10 @@
   <a href="#" (click)="sortByScoreClicked()">
     Score
   </a>
+  <p>
+    <a href="#" (click)="reset()">
+      Reset
+    </a>
+  </p>
 
 </div>

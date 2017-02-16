@@ -19,12 +19,5 @@ export class ApiService {
       this.jsonData.next(result.json().data.children) 
       console.log(result.json().data.children)
     }.bind(this))
-
-    // this.http.get(site).map(function(result){
-    //   return result.json().children
-    // }).map(function(){
-
-    // })
-
   }
 }

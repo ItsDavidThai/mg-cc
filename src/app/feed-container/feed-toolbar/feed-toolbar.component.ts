@@ -22,14 +22,19 @@ export class FeedToolbarComponent implements OnInit {
    }
   onFilterSubmit(e){
     e.preventDefault();
-    console.log(this.form.value)
-    this.toolbarService.subredditFilter.next(this.form.value.subreddit)
+    this.toolbarService.subredditFilter.next(this.form.value.subreddit.toLowerCase())
   }
   sortByDateClicked(){
     this.toolbarService.sortByDate.next(true)
   }
   sortByScoreClicked(){
     this.toolbarService.sortByScore.next(true)
+  }
+  changeSortOrder(e){
+    this.toolbarService.sortOrder = e.target.checked
+  }
+  reset(){
+    this.toolbarService.reset.next(true)
   }
   ngOnInit() {
   }

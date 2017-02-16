@@ -19,23 +19,36 @@ export class FeedBodyComponent implements OnInit {
       this.subredditFilter = res
       console.log(this)
       this.rowData = this.rowData.filter(function(item){
-        console.log(item, 'inside rowdata update')
-        return item.data.subreddit.includes(this.subredditFilter)
+        return item.data.subreddit.toLowerCase().includes(this.subredditFilter)
       }.bind(this))
     }.bind(this))
 
     this.toolbarService.sortByDate.subscribe(function(res){
-      this.rowData = this.rowData.sort(function(a, b){
-        return a.data.created > b.data.created ? 1 : -1
-      })
-    }.bind(this))
-    this.toolbarService.sortByScore.subscribe(function(res){
-      
-      this.rowData = this.rowData.sort(function(a, b){
-        return a.data.score > b.data.score ? 1 : -1
-      })
+        this.sortBy('created')
     }.bind(this))
 
+    this.toolbarService.sortByScore.subscribe(function(res){
+      this.sortBy('score')
+    }.bind(this))
+
+    this.toolbarService.reset.subscribe(function(res){
+      this.rowData = this.apiService.jsonData.getValue().sort()
+    }.bind(this))
+    
+
+  }
+  
+  sortBy(type){
+
+    if(!this.toolbarService.sortOrder){
+      this.rowData = this.rowData.sort(function(a, b){
+        return a.data[type] > b.data[type] ? 1 : -1
+      })
+    } else {
+      this.rowData = this.rowData.sort(function(a, b){
+        return a.data[type] < b.data[type] ? 1 : -1
+      })
+    }
   }
 
   ngOnInit() {

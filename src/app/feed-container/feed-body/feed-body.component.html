@@ -1,3 +1,23 @@
-<p>
-  feed-body works!
-</p>
+<table responsive-table>
+  <thead>
+    <tr>
+        <th data-field="id">Subreddit</th>
+        <th data-field="createdAt">CreatedAt</th>
+        <th data-field="score">Score</th>
+        <th data-field="score">brandSafe</th>
+        <th data-field="score">postHint</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr app-feed-body-item 
+      [subreddit]="data.data.subreddit" 
+      [score]="data.data.score"
+      [createdAt]="data.data.created" 
+      [brandSafe]="data.data.brand_safe"
+      [postHint]="data.data.post_hint"
+      *ngFor="let data of rowData">
+    </tr>
+  </tbody>
+</table>

@@ -1,3 +1,30 @@
-<p>
-  feed-toolbar works!
-</p>
+<h1>Table Filtesr</h1>
+<form [formGroup]="form" (ngSubmit)="onFilterSubmit($event)">
+  <p>
+      <label>Subreddit:</label>
+      <input type="text" formControlName="subreddit">
+  </p>
+  <!--<p>
+      <label>Post Type:</label>
+      <input type="text" formControlName="postHint">
+  </p>-->
+  <!-- Switch -->
+  <div class="switch"> 
+    <p>
+      <label>brandSafe</label>
+    </p>
+    <label>
+      Off
+      <input type="checkbox" formControlName="brandSafe">
+      <span class="lever"></span>
+      On
+    </label>
+  </div>
+
+  <p>
+      <button type="submit" [disabled]="!form.valid">Submit</button>
+  </p>
+  <!--<p>
+      <button type="submit" ng-submit="">Reset Filters</button>
+  </p>-->
+</form>

@@ -1,57 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { ToolbarService } from '../../toolbar.service';
-
+/*
+  feed-body renders the table of information
+*/
 @Component({
   selector: 'app-feed-body',
   templateUrl: './feed-body.component.html',
   styleUrls: ['./feed-body.component.css']
 })
-export class FeedBodyComponent implements OnInit {
+export class FeedBodyComponent {
+  // used to render table data
   public rowData;
+  // hold the subreddit filter phrase
   public subredditFilter;
   constructor(public apiService: ApiService, public toolbarService: ToolbarService) { 
-    this.apiService.jsonData.subscribe(function(result){
-      this.rowData = result
-
+    // use apiService http get request and then set rowData to the response json 
+    this.apiService.jsonData.subscribe(function(result) {
+      this.rowData = result;
     }.bind(this))
-    this.toolbarService.subredditFilter.subscribe(function(res){
-      this.subredditFilter = res
-      console.log(this)
-      this.rowData = this.rowData.filter(function(item){
+    // subscribe to subredditFilter observable and trigger when user submits a search filter
+    this.toolbarService.subredditFilter.subscribe(function(res) {
+      this.subredditFilter = res;
+      this.rowData = this.rowData.filter(function(item) {
         return item.data.subreddit.toLowerCase().includes(this.subredditFilter)
       }.bind(this))
     }.bind(this))
-
-    this.toolbarService.sortByDate.subscribe(function(res){
-        this.sortBy('created')
+    // subsribe to sortByDate observable and sort when triggered
+    this.toolbarService.sortByDate.subscribe(function(res) {
+        this.sortBy('created');
     }.bind(this))
-
-    this.toolbarService.sortByScore.subscribe(function(res){
-      this.sortBy('score')
+    // subscribe to sortByScore observable and sort when triggered
+    this.toolbarService.sortByScore.subscribe(function(res) {
+      this.sortBy('score');
     }.bind(this))
-
+    // subscribe to reset observable and reset filter when triggered
     this.toolbarService.reset.subscribe(function(res){
-      this.rowData = this.apiService.jsonData.getValue().sort()
+      this.rowData = this.apiService.jsonData.getValue().sort();
     }.bind(this))
-    
-
   }
-  
-  sortBy(type){
-
-    if(!this.toolbarService.sortOrder){
-      this.rowData = this.rowData.sort(function(a, b){
+  /*
+    sorting function 
+    type: string- pass in sort category
+  */
+  sortBy(type) {
+    // if true sort by biggest, if false sort by smallest
+    if(!this.toolbarService.sortOrder) {
+      this.rowData = this.rowData.sort(function(a, b) {
         return a.data[type] > b.data[type] ? 1 : -1
       })
     } else {
-      this.rowData = this.rowData.sort(function(a, b){
+      this.rowData = this.rowData.sort(function(a, b) {
         return a.data[type] < b.data[type] ? 1 : -1
       })
     }
   }
-
-  ngOnInit() {
-  }
-
 }

@@ -1,9 +1,11 @@
+// ng Dependencies
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from "@angular/forms";
 
+// Components 
 import { AppComponent } from './app.component';
 import { FeedContainerComponent } from './feed-container/feed-container.component';
 import { FeedBodyComponent } from './feed-container/feed-body/feed-body.component';
